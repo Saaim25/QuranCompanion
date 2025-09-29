@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QuranCompanion")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b7e505bfb04c1be0672ab24fd7207e150d58c70")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c5c1a3a807b16bd3e1e486d3f248be76916f0a57")]
 [assembly: System.Reflection.AssemblyProductAttribute("QuranCompanion")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QuranCompanion")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

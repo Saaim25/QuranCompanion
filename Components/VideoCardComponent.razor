@@ -1,0 +1,89 @@
+@using System.ComponentModel.DataAnnotations
+@using System.Text.Json
+@using Blazored.LocalStorage
+@using Microsoft.AspNetCore.Components.Authorization
+@using Supabase.Gotrue
+@inject Supabase.Client SupabaseClient
+@inject ILocalStorageService localStorage
+@inject IToastService toastService
+
+<div class="video-note-container">
+    <div class="row g-4 align-items-center video-note-wrapper w-100">
+        <!-- Video Section -->
+        <div class="col-lg-6 col-md-12">
+            <div class="video-card">
+                <div class="ratio ratio-16x9">
+                    <iframe src="@formModel.VideoUrl" title="@formModel.Title" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="col-lg-6 col-md-12">
+            <div class="note-card">
+                <div class="note-card-body">
+                    <h4 class="note-title">@formModel.Title - Progress</h4>
+
+                    <EditForm Model="@formModel" OnValidSubmit="HandleSubmit">
+                        <DataAnnotationsValidator />
+
+                        <div class="form-group">
+                            <label class="form-label">Notes</label>
+                            <InputTextArea class="form-control gradient-input" @bind-Value="formModel.Notes" rows="3"
+                                placeholder="Enter notes" />
+                        </div>
+
+                        <div class="form-check d-flex justify-content-between align-items-center mt-3">
+                            <div>
+                                <InputCheckbox class="form-check-input" @bind-Value="formModel.IsWatched" />
+                                <label class="form-check-label text-black">Mark as Watched</label>
+                            </div>
+
+                            <button type="submit" class="btn-gradient">
+                                💾 Save Progress
+                            </button>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    @* [Parameter] public string VideoUrl { get; set; } = "";
+    [Parameter] public string Title { get; set; } = "Video";
+    [Parameter] public int VideoId { get; set; } = 0; *@
+
+    [Parameter] public VideoNoteModel formModel {get; set;}= new();
+    [Parameter] public string userId {get; set;} = string.Empty;
+    private async Task HandleSubmit()
+    {
+        try
+        {
+            // 🔹 Save to Supabase or any backend
+            Console.WriteLine($"Video Notes: {formModel.Notes}, Watched: {formModel.IsWatched}");
+
+            if (string.IsNullOrWhiteSpace(formModel.Notes) || string.IsNullOrWhiteSpace(userId))
+                return;
+
+            await SupabaseClient.Rpc("save_user_notes", new
+            {
+                p_videoid = formModel.VideoId,
+                p_userid = userId,
+                p_notes = formModel.Notes,
+                p_iswatched = formModel.IsWatched
+            });
+
+            toastService.ShowSuccess("Progress saved successfully!");
+        }
+        catch
+        {
+            toastService.ShowError("Failed to save progress!");
+        }
+    }
+}

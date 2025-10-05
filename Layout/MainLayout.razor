@@ -1,16 +1,56 @@
-﻿@inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+﻿@using Blazored.Toast
+@using Microsoft.AspNetCore.Components.Authorization
+@using QuranCompanion.Components
+@inherits LayoutComponentBase
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+<BlazoredToasts />
+<AuthorizeView>
+    <Authorized>
+        <div class="page">
+            <div class="sidebar">
+                <NavMenu />
+            </div>
+
+            <main>
+                <div class="top-row px-4 profile-container">
+                    <button class="profile-btn" @onclick="ViewProfile">Profile</button>
+
+                    @if (isViewProfile)
+                    {
+                        <ViewProfileComponent OnClose="CloseProfile" />
+                    }
+                </div>
+
+                <article class="content">
+                    @Body
+                </article>
+            </main>
         </div>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+
+    </Authorized>
+
+    <NotAuthorized>
+        <div class="page">
+            <main>
+                <article class="content">
+                    @Body
+                </article>
+            </main>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private bool isViewProfile = false;
+
+    private void ViewProfile()
+    {
+        isViewProfile = true;
+    }
+
+    private void CloseProfile()
+    {
+        isViewProfile = false;
+    }
+}

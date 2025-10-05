@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets/QuranCompanion.styles.css"
     },
     {
+      "Id": "/Users/saaim/Projects/QuranCompanion/wwwroot/css/AuthStyle.css",
+      "PackagePath": "staticwebassets/css/AuthStyle.css"
+    },
+    {
       "Id": "/Users/saaim/Projects/QuranCompanion/wwwroot/css/app.css",
       "PackagePath": "staticwebassets/css/app.css"
     },
@@ -23,14 +27,6 @@
     {
       "Id": "/Users/saaim/Projects/QuranCompanion/wwwroot/css/bootstrap/bootstrap.min.css.map",
       "PackagePath": "staticwebassets/css/bootstrap/bootstrap.min.css.map"
-    },
-    {
-      "Id": "/Users/saaim/Projects/QuranCompanion/wwwroot/favicon.png",
-      "PackagePath": "staticwebassets/favicon.png"
-    },
-    {
-      "Id": "/Users/saaim/Projects/QuranCompanion/wwwroot/icon-192.png",
-      "PackagePath": "staticwebassets/icon-192.png"
     },
     {
       "Id": "/Users/saaim/Projects/QuranCompanion/wwwroot/index.html",

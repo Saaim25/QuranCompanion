@@ -1,0 +1,88 @@
+@page "/signup"
+@using System.ComponentModel.DataAnnotations
+@using Supabase.Gotrue
+@inject Supabase.Client SupabaseClient
+@inject Supabase.Client SupabaseClient
+@inject SupabaseAuthStateProvider AuthStateProvider
+@inject NavigationManager Navigation
+@inject IToastService ToastService
+<EditForm Model="@signUpModel" OnValidSubmit="@HandleSignUp">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <h2>Create Account</h2>
+
+            <div class="form-group">
+                <label>User Name</label>
+                <InputText class="form-control" @bind-Value="signUpModel.UserName" />
+                <ValidationMessage For="@(() => signUpModel.UserName)" />
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <InputText type="email" class="form-control" @bind-Value="signUpModel.Email" />
+                <ValidationMessage For="@(() => signUpModel.Email)" />
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <InputText type="password" class="form-control" @bind-Value="signUpModel.Password" />
+                <ValidationMessage For="@(() => signUpModel.Password)" />
+            </div>
+
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <InputText type="password" class="form-control" @bind-Value="signUpModel.ConfirmPassword" />
+                <ValidationMessage For="@(() => signUpModel.ConfirmPassword)" />
+            </div>
+
+            <button type="submit" class="btn-primary">Sign Up</button>
+            <p class="switch-link">Already have an account? <a href="/login">Login</a></p>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    private SignUpModel signUpModel = new();
+    private NavigationManager? navigationManager { get; set; }
+
+    private async Task HandleSignUp()
+    {
+        try
+        {
+            var email = signUpModel.Email!.Trim();
+            var password = signUpModel.Password!.Trim();
+
+           
+            // 1. Sign up using Supabase Auth (email + password only)
+             var response = await SupabaseClient.Auth.SignUp(email: email, password: password);
+
+            if (response!.User == null)
+            {
+                ToastService.ShowError("Signup failed, please try again.");
+                Console.WriteLine("Sign up failed.");
+                return;
+            }
+
+            // 2. Call your stored procedure to insert extra user details
+            var result = await SupabaseClient.Rpc("add_user", new
+            {
+                p_userid = response.User.Id,
+                p_username = signUpModel.UserName,
+                p_email = signUpModel.Email
+            });
+
+            // 3. Show success message
+            ToastService.ShowSuccess("Account created successfully!");
+
+            // (Optional) Redirect to login page
+            Navigation!.NavigateTo("/login");
+        }
+        catch (Exception ex)
+        {
+             ToastService.ShowError($"Error: {ex.Message}");
+        }
+    }
+}

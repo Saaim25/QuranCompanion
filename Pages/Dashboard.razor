@@ -1,0 +1,106 @@
+@page "/dashboard"
+@attribute [Authorize]
+@using Blazored.LocalStorage
+@using Microsoft.AspNetCore.Authorization
+@using QuranCompanion.Components
+@using System.Text.Json
+@using System.Threading.Tasks
+@inject Supabase.Client SupabaseClient
+@inject ILocalStorageService localStorage
+@inject IToastService toastService
+
+@if (isSidebarCollapsed)
+{
+    <div class="showList-btn-div">
+        <button class="toggle-btn-show" @onclick="ToggleSidebar">➕ Show List</button>
+    </div>
+}
+
+<div class="video-dashboard">
+    <!-- Sidebar -->
+    @if (!isSidebarCollapsed)
+    {
+        <VideoSideBarComponent VideoNoteList="videoNoteList" CurrentIndex="currentIndex" OnVideoSelect="SelectVideo"
+            OnToggle="ToggleSidebar" />
+    }
+
+    <!-- Video Player -->
+    <div class="video-player">
+        @if (currentVideo != null)
+        {
+            <VideoCardComponent formModel="currentVideo" userId="@userId"/>
+        }
+        else
+        {
+            <p class="loading-text">Loading video...</p>
+        }
+    </div>
+</div>
+
+@code {
+    private List<VideoNoteModel> videoNoteList = new();
+    private VideoNoteModel? currentVideo;
+    private int currentIndex = 0;
+    private bool isSidebarCollapsed = false;
+    private string userId = string.Empty;
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadVideoNotes();
+        if (videoNoteList.Any())
+        {
+            currentIndex = 0;
+            currentVideo = videoNoteList[0];
+            await LoadNotesDetails(currentVideo.VideoId);
+        }
+    }
+
+    private async Task LoadVideoNotes()
+    {
+        var response = await SupabaseClient.From<VideoNoteModel>().Get();
+        videoNoteList = response.Models ?? new List<VideoNoteModel>();
+    }
+
+    private async Task SelectVideo(int index)
+    {
+        if (index >= 0 && index < videoNoteList.Count)
+        {
+            currentIndex = index;
+            currentVideo = videoNoteList[index];
+            await LoadNotesDetails(currentVideo.VideoId);
+        }
+        ToggleSidebar();
+    }
+    private async Task LoadNotesDetails(int VideoId){
+        try
+        {
+            userId = await localStorage!.GetItemAsync<string>("UserId") ?? "";
+
+            var notesDetails = await SupabaseClient.Rpc("get_user_notes", new
+            {
+                p_user_id = userId,
+                p_video_id = VideoId
+            });
+
+            if (!string.IsNullOrEmpty(notesDetails.Content))
+            {
+                var currentNotes = JsonSerializer.Deserialize<List<VideoNoteModel>>(notesDetails.Content!);
+                if (currentNotes != null && currentNotes.Count > 0)
+                {
+                    currentVideo!.Notes = currentNotes[0].Notes;
+                    currentVideo.IsWatched = currentNotes[0].IsWatched;
+                }
+                else
+                {
+                    // Handle no notes found
+                    currentVideo!.Notes = "";
+                    currentVideo.IsWatched = false;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            toastService.ShowError(ex.Message);
+        }
+    }
+    private void ToggleSidebar() => isSidebarCollapsed = !isSidebarCollapsed;
+}

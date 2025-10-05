@@ -1,0 +1,36 @@
+<div class="video-sidebar">
+    <div class="sidebar-header">
+        <h3>📺 Video List</h3>
+        <button class="toggle-btn-1" @onclick="ToggleSidebar">➖</button>
+
+    </div>
+
+    <div class="video-list">
+        @if (VideoNoteList?.Count > 0)
+        {
+            @foreach (var item in VideoNoteList.Select((val, idx) => new { val, idx }))
+            {
+                <button class="video-item @(item.idx == CurrentIndex ? "active" : "")"
+                    @onclick="() => OnVideoSelect.InvokeAsync(item.idx)">
+                    @item.val.Title
+                </button>
+            }
+        }
+        else
+        {
+            <p class="loading-text">Loading titles...</p>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter] public List<VideoNoteModel>? VideoNoteList { get; set; }
+    [Parameter] public int CurrentIndex { get; set; }
+    [Parameter] public EventCallback<int> OnVideoSelect { get; set; }
+    [Parameter] public EventCallback OnToggle { get; set; }
+    [Parameter] public bool IsWatched {get; set;}
+    public async Task ToggleSidebar()
+    {
+        await OnToggle.InvokeAsync();
+    }
+}

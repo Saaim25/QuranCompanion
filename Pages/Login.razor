@@ -1,0 +1,73 @@
+@page "/login"
+@using System.ComponentModel.DataAnnotations
+@using Blazored.LocalStorage
+@using Supabase.Gotrue
+@using System.Text.Json
+@inject Supabase.Client SupabaseClient
+@inject SupabaseAuthStateProvider AuthStateProvider
+@inject NavigationManager Navigation
+@inject IToastService toastService
+@inject ILocalStorageService localStorage
+
+<EditForm Model="@loginModel" OnValidSubmit="@HandleLogin">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <h2>Login</h2>
+
+            <div class="form-group">
+                <label>Email</label>
+                <InputText type="email" class="form-control" @bind-Value="loginModel.Email" />
+                <ValidationMessage For="@(() => loginModel.Email)" />
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <InputText type="password" class="form-control" @bind-Value="loginModel.Password" />
+                <ValidationMessage For="@(() => loginModel.Password)" />
+            </div>
+
+            <button type="submit" class="btn-primary">Login</button>
+            <p class="switch-link">Don't have an account? <a href="/signup">Sign Up</a></p>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    private LoginModel loginModel = new();
+    private async Task HandleLogin()
+    {
+        try
+        {
+            // TODO: call Supabase auth or your API
+            Console.WriteLine($"Logging in: {loginModel.Email}");
+            var response = await SupabaseClient.Auth.SignIn(
+            email: loginModel.Email!,
+            password: loginModel.Password!
+            );
+
+            if (response != null)
+            {
+                var activeUser = await SupabaseClient.Rpc("get_user_by_id", new { p_user_id = response.User!.Id });
+                var user = JsonSerializer.Deserialize<List<Dictionary<string, object>>>(activeUser.Content!);
+                await localStorage!.SetItemAsync("supabase_session", response.AccessToken);
+                await localStorage!.SetItemAsync("UserName", user![0]["username"].ToString()!);
+                await localStorage!.SetItemAsync("Email", user![0]["email"].ToString()!);
+                await localStorage!.SetItemAsync("UserId", response.User.Id!);
+                toastService.ShowSuccess("Logged in successfully!");
+                AuthStateProvider.NotifyUserAuthentication(response!.User!);
+                Navigation.NavigateTo("/dashboard");
+            }
+            else
+            {
+                toastService.ShowError("Login failed. Check your credentials.");
+            }
+        }
+        catch 
+        {
+            toastService.ShowError("Login failed. Check your credentials.");
+        }
+    }
+}

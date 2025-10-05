@@ -26,21 +26,33 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/saaim/Projects/QuranCompanion/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ291bnRlci5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
 [/Users/saaim/Projects/QuranCompanion/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/saaim/Projects/QuranCompanion/Pages/Weather.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvV2VhdGhlci5yYXpvcg==
+[/Users/saaim/Projects/QuranCompanion/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/saaim/Projects/QuranCompanion/Pages/SignUp.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2lnblVwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/saaim/Projects/QuranCompanion/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/saaim/Projects/QuranCompanion/Components/VideoCardComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9WaWRlb0NhcmRDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-w0pldbf1x3
+
+[/Users/saaim/Projects/QuranCompanion/Components/VideoSideBarComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9WaWRlb1NpZGVCYXJDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-t86empd6q7
+
+[/Users/saaim/Projects/QuranCompanion/Components/ViewProfileComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9WaWV3UHJvZmlsZUNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-9uwsroq34v
 
 [/Users/saaim/Projects/QuranCompanion/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L01haW5MYXlvdXQucmF6b3I=
@@ -49,3 +61,7 @@ build_metadata.AdditionalFiles.CssScope = b-f3tcp7ggcq
 [/Users/saaim/Projects/QuranCompanion/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L05hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-bylekav9sr
+
+[/Users/saaim/Projects/QuranCompanion/Pages/Dashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGFzaGJvYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-px4nqezq6y

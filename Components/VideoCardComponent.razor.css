@@ -1,0 +1,82 @@
+/* Container with gradient background */
+.video-note-container {
+  min-height: 100vh;
+  padding: 40px;
+  background: linear-gradient(135deg, #43cea2, #185a9d); /* same as login */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Video card */
+.video-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Note card */
+.note-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+  padding: 1.5rem;
+  animation: fadeInUp 0.6s ease;
+}
+
+.note-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.note-title {
+  margin-bottom: 1.2rem;
+  font-weight: 700;
+  color: #185a9d;
+}
+
+/* Inputs styled similar to login page */
+.gradient-input {
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+}
+
+.gradient-input:focus {
+  border-color: #43cea2;
+  box-shadow: 0 0 6px rgba(67, 206, 162, 0.6);
+  outline: none;
+}
+
+/* Gradient button */
+.btn-gradient {
+  background: linear-gradient(90deg, #43cea2, #185a9d);
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-gradient:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(24, 90, 157, 0.4);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

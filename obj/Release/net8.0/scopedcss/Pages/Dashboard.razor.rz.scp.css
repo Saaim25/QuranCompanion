@@ -1,0 +1,69 @@
+/* Overall dashboard wrapper */
+.video-dashboard[b-px4nqezq6y] {
+  display: flex;
+  gap: 1rem;
+  height: 88vh; /* adjust if you have a header */
+  box-sizing: border-box;
+  padding: 0.5rem 0rem;
+}
+
+/* Video Player section */
+.video-player[b-px4nqezq6y] {
+  flex: 3;
+  background: linear-gradient(135deg, #ffffff, #f2f6fc);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Placeholder/loading text */
+.loading-text[b-px4nqezq6y] {
+  color: #555;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Show button when sidebar is collapsed */
+.toggle-btn-show[b-px4nqezq6y] {
+  display: block;
+  background: linear-gradient(90deg, #43cea2, #185a9d);
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.toggle-btn-show:hover[b-px4nqezq6y] {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(24, 90, 157, 0.4);
+}
+
+.showList-btn-div[b-px4nqezq6y]{
+    padding: 0.5rem 0rem;
+}
+
+/* Responsive layout */
+@media (max-width: 1024px) {
+  .video-dashboard[b-px4nqezq6y] {
+    flex-direction: column;
+    height: 90vh;
+  }
+
+  .video-player[b-px4nqezq6y] {
+    width: 100%;
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .video-player[b-px4nqezq6y] {
+    min-height: 260px;
+  }
+}

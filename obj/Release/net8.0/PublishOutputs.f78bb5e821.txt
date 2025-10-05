@@ -1,0 +1,5 @@
+/Users/saaim/Projects/QuranCompanion/bin/Release/net8.0/publish/publish/web.config
+/Users/saaim/Projects/QuranCompanion/bin/Release/net8.0/publish/publish/wwwroot/sample-data/weather.json
+/Users/saaim/Projects/QuranCompanion/bin/Release/net8.0/publish/publish/wwwroot/_framework/blazor.boot.json
+/Users/saaim/Projects/QuranCompanion/bin/Release/net8.0/publish/_framework/blazor.boot.json
+/Users/saaim/Projects/QuranCompanion/bin/Release/net8.0/publish/web.config

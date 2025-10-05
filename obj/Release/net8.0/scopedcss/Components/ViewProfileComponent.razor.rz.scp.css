@@ -1,0 +1,70 @@
+.profile-popup[b-9uwsroq34v] {
+    position: absolute; /* now relative to .profile-container */
+    top: 40px; /* distance below the button */
+    right: 0;   /* align to the right edge of button */
+    z-index: 999;
+    background: #fff;
+    padding: 1.2rem;
+    border-radius: 16px;
+    width: 280px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+    z-index: 9999;
+    font-size: 1rem;
+    /* Gradient border */
+    border: 2px solid transparent;
+    background-clip: padding-box, border-box;
+    background-origin: border-box;
+    background-image: linear-gradient(#fff, #fff), 
+                      linear-gradient(135deg, #43cea2, #185a9d);
+    animation: scaleIn-b-9uwsroq34v 0.4s ease;
+}
+
+.profile-popup h3[b-9uwsroq34v] {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: #2f4f4f;
+}
+
+.profile-popup p[b-9uwsroq34v] {
+    margin: 0.3rem 0;
+    color: #444;
+    font-size: 0.85rem;
+}
+
+.popup-actions[b-9uwsroq34v] {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+/* Buttons - reuse gradient style */
+.btn[b-9uwsroq34v] {
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary[b-9uwsroq34v] {
+    background: linear-gradient(90deg, #43cea2, #185a9d);
+    color: white;
+}
+
+.btn-primary:hover[b-9uwsroq34v] {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(24, 90, 157, 0.4);
+}
+
+.btn-secondary[b-9uwsroq34v] {
+    background: #f1f1f1;
+    color: #333;
+}
+
+@keyframes scaleIn-b-9uwsroq34v {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

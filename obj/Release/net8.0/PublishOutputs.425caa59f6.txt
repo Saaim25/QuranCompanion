@@ -1,1 +1,5 @@
+/Users/saaim/Projects/QuranCompanion/publish/publish/web.config
+/Users/saaim/Projects/QuranCompanion/publish/publish/wwwroot/sample-data/weather.json
+/Users/saaim/Projects/QuranCompanion/publish/publish/wwwroot/_framework/blazor.boot.json
+/Users/saaim/Projects/QuranCompanion/publish/_framework/blazor.boot.json
 /Users/saaim/Projects/QuranCompanion/publish/web.config

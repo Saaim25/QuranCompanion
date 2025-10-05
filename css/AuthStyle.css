@@ -1,0 +1,101 @@
+/* Gradient background */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #43cea2, #185a9d); /* greenish-blue gradient */
+  padding: 20px;
+  animation: fadeInBg 1.5s ease-in-out;
+}
+
+/* Card */
+.auth-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+  max-width: 420px;
+  width: 100%;
+  animation: scaleIn 0.6s ease;
+}
+
+.auth-card h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #2f4f4f;
+  font-weight: 700;
+}
+
+/* Form styling */
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #43cea2;
+  box-shadow: 0 0 6px rgba(67, 206, 162, 0.6);
+  outline: none;
+}
+
+/* Buttons with gradient */
+.btn-primary {
+  width: 100%;
+  background: linear-gradient(90deg, #43cea2, #185a9d);
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(24, 90, 157, 0.4);
+}
+
+/* Switch link */
+.switch-link {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.switch-link a {
+  color: #185a9d;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.switch-link a:hover {
+  text-decoration: underline;
+}
+
+/* Animations */
+@keyframes fadeInBg {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
